@@ -6,7 +6,7 @@ import StickyHeadTable from './components/Table';
 import MenuIntroduction from './components/Dropdown';
 import {useQuery} from 'react-query';
 import { getCurrentInsites } from './queries/api';
-import { format, subDays } from 'date-fns';
+import { subDays } from 'date-fns';
 import { DropDownHolder } from './styles';
 
 function App() {
@@ -35,7 +35,7 @@ function App() {
             </Grid>
           </Grid>
           <Grid container item spacing={2}>
-          <Grid item xs={12}>
+            <Grid item xs={12}>
               <Chart chartdata={dataInsitesLoader ? {} : data} chartDataLoader={dataInsitesLoader} />
             </Grid>
             <Grid item xs={12}>

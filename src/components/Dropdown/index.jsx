@@ -6,7 +6,7 @@ import { MenuItem, menuItemClasses } from '@mui/base/MenuItem';
 import { styled } from '@mui/system';
 import { Dialog } from '@mui/material';
 import DatePicker from "react-datepicker";
-import { format, subDays } from 'date-fns';
+import { subDays } from 'date-fns';
 import { useQueryClient } from 'react-query'
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -61,6 +61,7 @@ export default function MenuIntroduction({ startDate, endDate, setStartDate, set
       setOpenDateRangeSelector(true);
     }
     queryClient.invalidateQueries({queryKey: ["logs"]})
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDateRange])
 
   return (

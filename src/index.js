@@ -9,11 +9,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 const queryClient = new QueryClient();
 
 root.render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <App />
-    </QueryClientProvider>
-  </React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
+  </QueryClientProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

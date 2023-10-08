@@ -9,16 +9,9 @@ import TableRow from '@mui/material/TableRow';
 import {useQuery} from 'react-query';
 import { getLogs } from '../../queries/api';
 import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
 import { tableColumns } from './constants';
+import { TableFooter } from '@mui/material';
 
-function CircularIndeterminate() {
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <CircularProgress />
-    </Box>
-  );
-}
 
 function handleRowType(column, value) {
   if (typeof value == "boolean") {
@@ -38,8 +31,6 @@ export default function StickyHeadTable({ startDate, endDate, dateChanged, setDa
   const [page, setPage] = React.useState(0);
   const [logsData, setLogsData] = React.useState([]);
 
-  console.log(startDate, endDate)
-
   const { data, error, isLoading: logsLoader } = useQuery(["logs", page], () => getLogs(startDate, endDate, page))
 
   React.useEffect(() => {
@@ -52,6 +43,7 @@ export default function StickyHeadTable({ startDate, endDate, dateChanged, setDa
     if (data && data.length > 0 && !logsLoader) {
       setLogsData([...logsData, ...data]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, logsLoader]);
 
   const handleScroll = React.useCallback((e) => {
@@ -81,7 +73,7 @@ export default function StickyHeadTable({ startDate, endDate, dateChanged, setDa
             <TableRow>
               {tableColumns.map((column, index) => (
                 <TableCell
-                  key={`${column.id}_${Math.random().toString(36).slice(2, 7)}`}
+                  key={column.id}
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
@@ -107,7 +99,7 @@ export default function StickyHeadTable({ startDate, endDate, dateChanged, setDa
                 );
               })}
           </TableBody>
-          {logsLoader ? <div key={"kkasd"}><CircularIndeterminate /></div> : <></>}
+          {logsLoader ? <TableFooter><CircularProgress /></TableFooter>: <TableFooter/>}
         </Table>
       </TableContainer>
     </Paper>

@@ -1,7 +1,10 @@
 import React from 'react';
 import { ResponsiveContainer, PieChart, Pie } from 'recharts';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const Chart = ({ chartdata, chartDataLoader }) => {
+
+  const isMobile = useMediaQuery('(min-width:900px)')
 
   const transformChartData = (data) => {
     return [
@@ -32,7 +35,7 @@ const Chart = ({ chartdata, chartDataLoader }) => {
   }
 
   return (
-    <ResponsiveContainer width={"100%"} height={300}>
+    <ResponsiveContainer width={"100%"} height={!isMobile ? 200: 300}>
         <PieChart>
             <Pie dataKey="value" data={chartDataLoader ? {} : transformChartData(chartdata)} fill={renderColor} label={renderLabel} />
         </PieChart>

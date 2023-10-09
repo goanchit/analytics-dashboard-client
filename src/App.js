@@ -13,25 +13,24 @@ function App() {
   const [startDate, setStartDate] = React.useState(new Date())
   const [endDate, setEndDate] = React.useState(subDays(new Date(), 1))
   const [dateChanged, setDateChanged] = React.useState(false);
-  const [selectedDateRange, setSelectedDateRange] = React.useState("last_24_hours")
 
-  const { data, isLoading: dataInsitesLoader } = useQuery("dataInsites", () => getCurrentInsites(startDate, endDate))
+  const { data, isLoading: dataInsitesLoader } = useQuery(["dataInsites", startDate, endDate], () => getCurrentInsites(startDate, endDate))
 
   return (
     <>
         <Grid container height={'100vh'} p={2} spacing={2} direction={"column"}>
           <Grid item container xs={1} spacing={2}>
             <Grid item xs={6} md={3}>
-              <CustomCard title={`Total No of Unique Visitors: ${dataInsitesLoader ? "-": data.unique_users}`}></CustomCard>
+              <CustomCard title={`Total No of Unique Visitors: ${dataInsitesLoader ? "-": data?.unique_users}`}></CustomCard>
             </Grid>
             <Grid item xs={6} md={3}>
-              <CustomCard title={`Total No of Calls: ${dataInsitesLoader ? "-": data.total_visitors}`}></CustomCard>
+              <CustomCard title={`Total No of Calls: ${dataInsitesLoader ? "-": data?.total_visitors}`}></CustomCard>
             </Grid>
             <Grid item xs={6} md={3}>
-              <CustomCard title={`Total No of Failures: ${dataInsitesLoader ? "-": data.failure_count}`}></CustomCard>
+              <CustomCard title={`Total No of Failures: ${dataInsitesLoader ? "-": data?.failure_count}`}></CustomCard>
             </Grid>
             <Grid item xs={6} md={3}>
-              <DropDownHolder><MenuIntroduction selectedDateRange={selectedDateRange} setSelectedDateRange={setSelectedDateRange} startDate={startDate} endDate={endDate} setEndDate={setEndDate} setStartDate={setStartDate} setDateChanged={setDateChanged} /></DropDownHolder>
+              <DropDownHolder><MenuIntroduction startDate={startDate} endDate={endDate} setEndDate={setEndDate} setStartDate={setStartDate} setDateChanged={setDateChanged} /></DropDownHolder>
             </Grid>
           </Grid>
           <Grid container item spacing={2}>

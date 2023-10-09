@@ -31,7 +31,7 @@ export default function StickyHeadTable({ startDate, endDate, dateChanged, setDa
   const [page, setPage] = React.useState(0);
   const [logsData, setLogsData] = React.useState([]);
 
-  const { data, error, isLoading: logsLoader } = useQuery(["logs", page], () => getLogs(startDate, endDate, page))
+  const { data, error, isLoading: logsLoader } = useQuery(["logs", page, startDate, endDate], () => getLogs(startDate, endDate, page))
 
   React.useEffect(() => {
     if (dateChanged) {

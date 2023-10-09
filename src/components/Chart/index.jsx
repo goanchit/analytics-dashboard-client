@@ -10,17 +10,17 @@ const Chart = ({ chartdata, chartDataLoader }) => {
     return [
       {
         "name": "Failure Count",
-        "value": data.failure_count,
+        "value": data ? data.failure_count : 0 ,
         "fill": "#384E77"
       },
       {
         "name": "Total Visitors",
-        "value": data.total_visitors,
+        "value": data ? data.total_visitors : 0,
         "fill": "#8BBEB2",
       },
       {
         "name": "Unique Users",
-        "value": data.unique_users,
+        "value": data ? data.unique_users : 0,
         "fill": '#0D0630'
       }
     ]
